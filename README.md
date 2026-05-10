@@ -4,11 +4,13 @@ SillyTavern third-party extension that adds a cyber/anime-style scramble reveal 
 
 ## Install
 
-Place this folder in:
+Place this folder in SillyTavern's third-party extensions directory, for example:
 
 ```text
 SillyTavern/public/scripts/extensions/third-party/stream-scramble-text
 ```
+
+The folder name can be changed; the extension detects its own path when loading `settings.html`.
 
 Restart or reload SillyTavern, then enable **Stream Scramble Text** in Extensions.
 

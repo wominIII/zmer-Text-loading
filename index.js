@@ -2,6 +2,15 @@ import { extension_settings, renderExtensionTemplateAsync } from '../../../exten
 import { saveSettingsDebounced } from '../../../../script.js';
 
 const SETTINGS_KEY = 'streamScrambleText';
+const LOG_PREFIX = '[Stream Scramble Text]';
+
+const EXTENSION_PATH = (() => {
+  const pathname = decodeURIComponent(new URL('.', import.meta.url).pathname).replace(/\/$/, '');
+  const marker = '/scripts/extensions/';
+  const markerIndex = pathname.indexOf(marker);
+  if (markerIndex !== -1) return pathname.slice(markerIndex + marker.length);
+  return 'third-party/stream-scramble-text';
+})();
 
 const DEFAULT_SETTINGS = {
   enabled: true,
@@ -187,7 +196,7 @@ function updateGlowClass() {
 }
 
 async function renderSettings() {
-  const html = await renderExtensionTemplateAsync('third-party/stream-scramble-text', 'settings');
+  const html = await renderExtensionTemplateAsync(EXTENSION_PATH, 'settings');
   $('#extensions_settings2').append(html);
 
   const bindCheckbox = (selector, key) => {
@@ -224,13 +233,17 @@ async function renderSettings() {
 }
 
 jQuery(async () => {
-  getSettings();
-  await renderSettings();
-  updateGlowClass();
-  startObserver();
+  try {
+    getSettings();
+    await renderSettings();
+    updateGlowClass();
+    startObserver();
 
-  const chatWaiter = new MutationObserver(() => {
-    if (document.getElementById('chat') && !state.observer) startObserver();
-  });
-  chatWaiter.observe(document.body, { childList: true, subtree: true });
+    const chatWaiter = new MutationObserver(() => {
+      if (document.getElementById('chat') && !state.observer) startObserver();
+    });
+    chatWaiter.observe(document.body, { childList: true, subtree: true });
+  } catch (error) {
+    console.error(`${LOG_PREFIX} Failed during initialization`, error);
+  }
 });
