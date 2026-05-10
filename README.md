@@ -17,6 +17,7 @@ Restart or reload SillyTavern, then enable **Stream Scramble Text** in Extension
 - Animates newly streamed text without replacing the whole message HTML.
 - Preserves Markdown-rendered structure, links, code blocks, and existing DOM elements.
 - Includes presets for blocks, matrix, symbols, numbers, and mixed characters.
+- Uses SillyTavern's native extension settings drawer UI.
 - Respects `prefers-reduced-motion` by not animating when the OS asks for reduced motion.
 
 ## Settings

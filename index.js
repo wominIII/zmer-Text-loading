@@ -1,4 +1,4 @@
-import { extension_settings } from '../../../extensions.js';
+import { extension_settings, renderExtensionTemplateAsync } from '../../../extensions.js';
 import { saveSettingsDebounced } from '../../../../script.js';
 
 const SETTINGS_KEY = 'streamScrambleText';
@@ -186,28 +186,9 @@ function updateGlowClass() {
   document.documentElement.classList.toggle('stream-scramble-glow-enabled', Boolean(state.settings?.glow));
 }
 
-function renderSettings() {
-  const html = `
-    <div id="stream_scramble_settings" class="stream-scramble-settings">
-      <label><span>Enabled</span><input id="stream_scramble_enabled" type="checkbox"></label>
-      <label><span>Characters</span>
-        <select id="stream_scramble_charset">
-          <option value="blocks">Blocks</option>
-          <option value="matrix">Matrix kana</option>
-          <option value="symbols">Symbols</option>
-          <option value="numbers">Numbers</option>
-          <option value="mixed">Mixed</option>
-          <option value="custom">Custom</option>
-        </select>
-      </label>
-      <label><span>Custom chars</span><input id="stream_scramble_custom" type="text" maxlength="80"></label>
-      <label><span>Duration</span><input id="stream_scramble_duration" type="range" min="80" max="1600" step="20"><small id="stream_scramble_duration_value"></small></label>
-      <label><span>Frame rate</span><input id="stream_scramble_fps" type="range" min="10" max="60" step="1"><small id="stream_scramble_fps_value"></small></label>
-      <label><span>Tail length</span><input id="stream_scramble_tail" type="range" min="6" max="160" step="1"><small id="stream_scramble_tail_value"></small></label>
-      <label><span>Glow</span><input id="stream_scramble_glow" type="checkbox"></label>
-    </div>`;
-
-  $('#extensions_settings').append(html);
+async function renderSettings() {
+  const html = await renderExtensionTemplateAsync('third-party/stream-scramble-text', 'settings');
+  $('#extensions_settings2').append(html);
 
   const bindCheckbox = (selector, key) => {
     const input = document.querySelector(selector);
@@ -244,7 +225,7 @@ function renderSettings() {
 
 jQuery(async () => {
   getSettings();
-  renderSettings();
+  await renderSettings();
   updateGlowClass();
   startObserver();
 

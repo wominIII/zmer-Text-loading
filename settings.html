@@ -1,0 +1,73 @@
+<div id="stream_scramble_settings" class="stream-scramble-settings">
+    <div class="inline-drawer">
+        <div class="inline-drawer-toggle inline-drawer-header">
+            <b>流式乱码揭示动画</b>
+            <div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div>
+        </div>
+        <div class="inline-drawer-content">
+            <label class="checkbox_label" for="stream_scramble_enabled">
+                <input id="stream_scramble_enabled" type="checkbox" />
+                <span class="fa-solid fa-circle-info stream-scramble-help" title="开启后，AI 回复流式输出时会对新增文本播放乱码揭示动画。"></span>
+                <span>启用流式动画</span>
+            </label>
+
+            <label class="checkbox_label" for="stream_scramble_glow">
+                <input id="stream_scramble_glow" type="checkbox" />
+                <span class="fa-solid fa-circle-info stream-scramble-help" title="给正在扰动的文本添加轻微霓虹发光效果。"></span>
+                <span>启用霓虹发光</span>
+            </label>
+
+            <div class="stream-scramble-grid">
+                <label for="stream_scramble_charset">
+                    <span class="fa-solid fa-circle-info stream-scramble-help" title="扰动时使用的随机字符集合。Blocks 最接近示例里的 ░▒▓█ 风格。"></span>
+                    字符集
+                </label>
+                <select id="stream_scramble_charset" class="text_pole">
+                    <option value="blocks">Blocks</option>
+                    <option value="matrix">Matrix kana</option>
+                    <option value="symbols">Symbols</option>
+                    <option value="numbers">Numbers</option>
+                    <option value="mixed">Mixed</option>
+                    <option value="custom">Custom</option>
+                </select>
+
+                <label for="stream_scramble_custom">
+                    <span class="fa-solid fa-circle-info stream-scramble-help" title="选择 Custom 字符集时使用。留空会回退到 Blocks。"></span>
+                    自定义字符
+                </label>
+                <input id="stream_scramble_custom" class="text_pole" type="text" maxlength="80" placeholder="例如：░▒▓█01" />
+
+                <label for="stream_scramble_duration">
+                    <span class="fa-solid fa-circle-info stream-scramble-help" title="每次文本更新从乱码恢复到真实文字的时间。"></span>
+                    动画时长
+                </label>
+                <div class="stream-scramble-range-row">
+                    <input id="stream_scramble_duration" type="range" min="80" max="1600" step="20" />
+                    <small id="stream_scramble_duration_value" class="stream-scramble-value"></small>
+                </div>
+
+                <label for="stream_scramble_fps">
+                    <span class="fa-solid fa-circle-info stream-scramble-help" title="乱码字符刷新频率。越高越顺滑，也会更占一点性能。"></span>
+                    刷新帧率
+                </label>
+                <div class="stream-scramble-range-row">
+                    <input id="stream_scramble_fps" type="range" min="10" max="60" step="1" />
+                    <small id="stream_scramble_fps_value" class="stream-scramble-value"></small>
+                </div>
+
+                <label for="stream_scramble_tail">
+                    <span class="fa-solid fa-circle-info stream-scramble-help" title="每次流式更新最多扰动末尾多少个字符，调低可减少长回复时的视觉噪音。"></span>
+                    扰动尾长
+                </label>
+                <div class="stream-scramble-range-row">
+                    <input id="stream_scramble_tail" type="range" min="6" max="160" step="1" />
+                    <small id="stream_scramble_tail_value" class="stream-scramble-value"></small>
+                </div>
+            </div>
+
+            <div class="stream-scramble-note">
+                会自动跳过代码块、编辑框和输入框；系统开启“减少动态效果”时不会播放动画。
+            </div>
+        </div>
+    </div>
+</div>
