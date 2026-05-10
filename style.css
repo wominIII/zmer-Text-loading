@@ -1,0 +1,37 @@
+.stream-scramble-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stream-scramble-settings label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.stream-scramble-settings input[type='range'] {
+  width: 150px;
+}
+
+.stream-scramble-settings select,
+.stream-scramble-settings input[type='text'] {
+  max-width: 180px;
+}
+
+.stream-scramble-active {
+  text-shadow:
+    0 0 4px color-mix(in srgb, var(--SmartThemeQuoteColor, #66e3ff) 70%, transparent),
+    0 0 12px color-mix(in srgb, var(--SmartThemeQuoteColor, #66e3ff) 35%, transparent);
+}
+
+.stream-scramble-char {
+  color: var(--SmartThemeQuoteColor, #66e3ff);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stream-scramble-active {
+    text-shadow: none;
+  }
+}
